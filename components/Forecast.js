@@ -4,87 +4,60 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 export default function Forecast() {
 	return (
 		<View>
-			<View 
-			className="flex flex-column m-4 pb-4 p-4 justify-between rounded-3xl"
-			style={{backgroundColor: 'rgba(255, 255, 255, 0.25)'}}>
-				<View className="flex flex-row justify-between items-end pb-2">
-					<Text style={{width: 70}}>today</Text>
-					<View className="flex flex-row items-end gap-1">
-					<Image source={require("../assets/dotIcons/icons8-wind-50.png")}
-				style={{
-					height: 20,
-					width: 25,
-					alignItems: 'flex-end',
-					tintColor: 'white'
-				}}/>
-					<Text className="">wind</Text>
-					</View>
-					<View className="flex flex-row items-end gap-1">
-					<Image source={require("../assets/dotIcons/icons8-wet-50.png")}
-				style={{
-					height: 20,
-					width: 25,
-					alignItems: 'flex-end',
-					tintColor: 'white'
-				}}/>
-					<Text className="">rain</Text>
-					</View>
-					<Text className="">low</Text>
-					<Text className="">high</Text>
-				</View>
+			
+			{/* 5 day forecast */}
 
-				<View className="flex flex-row justify-between items-end pb-2">
-				<Text style={{width: 70}}>tomorrow</Text>
-					<View className="flex flex-row items-end gap-1">
-					<Image source={require("../assets/dotIcons/icons8-wind-50.png")}
-				style={{
-					height: 20,
-					width: 25,
-					alignItems: 'flex-end',
-					tintColor: 'white'
-				}}/>
-					<Text className="">wind</Text>
-					</View>
-					<View className="flex flex-row items-end gap-1">
-					<Image source={require("../assets/dotIcons/icons8-wet-50.png")}
-				style={{
-					height: 20,
-					width: 25,
-					alignItems: 'flex-end',
-					tintColor: 'white'
-				}}/>
-					<Text className="">rain</Text>
-					</View>
-					<Text className="">low</Text>
-					<Text className="">high</Text>
-				</View>
+			<ScrollView
+				horizontal={true}
+				showsHorizontalScrollIndicator={false}
+				className="flex gap-3">
+				
+			{
+				weather?.forecast?.forecastday?.map((item, index) => {
+					const correctDate = addDays(new Date(item.date), 1)
+					const dayName = format(new Date(correctDate), 'iiii')
 
-				<View className="flex flex-row justify-between items-end pb-2">
-				<Text style={{width: 70}}>next day</Text>
-					<View className="flex flex-row items-end gap-1">
-					<Image source={require("../assets/dotIcons/icons8-wind-50.png")}
-				style={{
-					height: 20,
-					width: 25,
-					alignItems: 'flex-end',
-					tintColor: 'white'
-				}}/>
-					<Text className="">wind</Text>
-					</View>
-					<View className="flex flex-row items-end gap-1">
-					<Image source={require("../assets/dotIcons/icons8-wet-50.png")}
-				style={{
-					height: 20,
-					width: 25,
-					alignItems: 'flex-end',
-					tintColor: 'white'
-				}}/>
-					<Text className="">rain</Text>
-					</View>
-					<Text className="">low</Text>
-					<Text className="">high</Text>
-				</View>
+					return (
+						<View 
+						key={index}
+						className="flex items-center w-32 mb-8 p-4 mx-2 space-y-1 rounded-3xl"
+						style={{backgroundColor: 'rgba(30, 30, 30, 0.85)', height: 150}}>
+							<Text className={`font-bold ${textColor}`}>{dayName}</Text>
+							<View className="flex flex-row items-end">
+							<Image 
+								source={weatherData[item?.day?.condition?.code].icon}
+								style={{
+								resizeMode: 'contain',
+								height: 20,
+								width: 20,
+						}}/>
+							<Text className={textColor}>{roundNumber(item?.day?.mintemp_f)}° / {roundNumber(item?.day?.maxtemp_f)}°</Text>
+								</View>
+							<View className="flex flex-row items-end gap-1">
+							<Image source={require("../assets/WEATHER2/sunrise.png")}
+								style={{
+								resizeMode: 'contain',
+								height: 30,
+								width: 30,
+						}}/>
+							<Text className={textColor}>{item.astro.sunrise.toLowerCase()}</Text>
+							</View>
+							<View className="flex flex-row items-end gap-1">
+							<Image source={require("../assets/WEATHER2/sunset.png")}
+								style={{
+								resizeMode: 'contain',
+								height: 30,
+								width: 30,
+						}}/>
+							<Text className={textColor}>{item.astro.sunset.toLowerCase()}</Text>
+							</View>
+						</View>
+						
+					)
+				})
+			}
+			
+			</ScrollView>
 			</View>
-		</View>
 	)
 }

@@ -8,6 +8,10 @@ const forecastEndpoint = params =>
 const locationsEndpoint = params => 
 `${API_URL}search.json?key=${API_KEY}&q=${params.cityName}`
 
+
+
+
+
 const apiCall = async (endpoint) => {
 	const options = {
 		method: 'GET',
