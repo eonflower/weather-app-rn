@@ -1,6 +1,4 @@
 
-
-
 export const weatherData = {
   1000: {
     day: "Sunny",

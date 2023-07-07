@@ -1,15 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Image, ActivityIndicator, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import {MagnifyingGlassIcon, CalendarDaysIcon} from "react-native-heroicons/outline"
+import {MagnifyingGlassIcon} from "react-native-heroicons/outline"
 import {MapPinIcon} from "react-native-heroicons/solid"
-import Hourly from '../components/Hourly';
-import Forecast from '../components/Forecast';
 import {debounce} from "lodash"
 import { fetchLocations, fetchWeatherForecast, fetchCurrentLocation } from '../api/weather';
 import {format, addDays} from 'date-fns'
-import { weatherImages, weatherData } from '../constants';
+import { weatherData } from '../constants';
 import { storeData, getData } from '../utils/asyncStorage';
-import * as Location from 'expo-location'
+// import * as Location from 'expo-location'
 
 
 
