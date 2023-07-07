@@ -1,12 +1,15 @@
 import axios from "axios";
-import {API_KEY, API_URL} from '@env'
+import {WEATHER_API_KEY, WEATHER_API_URL} from '@env'
 
 const forecastEndpoint = params => 
-`${API_URL}forecast.json?key=${API_KEY}&q=${params.cityName}&days=${params.days}&aqi=no&alerts=no`
+`${WEATHER_API_URL}forecast.json?key=${WEATHER_API_KEY}&q=${params.cityName}&days=${params.days}&aqi=no&alerts=no`
 
 
 const locationsEndpoint = params => 
-`${API_URL}search.json?key=${API_KEY}&q=${params.cityName}`
+`${WEATHER_API_URL}search.json?key=${WEATHER_API_KEY}&q=${params.cityName}`
+
+// const currentLocationEndpoint = params => 
+// `${WEATHER_API_URL}forecast.json?key=${WEATHER_API_KEY}&q=${params.lat},${params.lon}&days=${params.days}&aqi=no&alerts=no`
 
 
 
@@ -33,3 +36,7 @@ export const fetchWeatherForecast = params => {
 export const fetchLocations = params => {
 	return apiCall(locationsEndpoint(params))
 }
+
+// export const fetchCurrentLocation = params => {
+// 	return apiCall(currentLocationEndpoint(params))
+// }
